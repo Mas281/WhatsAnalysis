@@ -6,6 +6,28 @@ This program combines WhatsApp's feature of being able to export chats and the m
 
 This was made a while ago when I first learnt regex and wanted to apply it to something. There are several uncommon (yet possible) situations which may break the regex (for example having someone in a chat whos name contains a colon for some reason). Also, if you send a message with multiple lines where one of the lines follows the regex exactly, it will think that it is a separate message, which unfortunately isn't preventable.
 
+## Usage
+
+To parse a chat:
+```java
+Optional<Chat> optChat = WhatsAnalysis.parseChat(new File("yourchat.txt"));
+// You can also parse a chat asynchronously using
+// WhatsAnalysis.parseChatAsync(File) which returns
+// a CompletableFuture object
+
+if (optChat.isPresent())
+{
+    // The file was parsed successfully
+    
+    // See the "Chat", "ChatMember" and "ChatMessage" 
+    // classes for the available methods to use
+}
+else
+{
+    // Error parsing file
+}
+```
+
 ## Maven
 
 You can use JitPack to access the project through Maven:
