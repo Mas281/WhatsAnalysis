@@ -39,7 +39,7 @@ You can use JitPack to access the project through Maven:
 
 <dependency>
     <groupId>com.github.Mas281</groupId>
-    <artifactId>DatabaseLib</artifactId>
+    <artifactId>WhatsAnalysis</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
