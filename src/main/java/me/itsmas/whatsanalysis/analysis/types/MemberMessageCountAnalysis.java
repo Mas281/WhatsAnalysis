@@ -62,7 +62,7 @@ public class MemberMessageCountAnalysis extends ChatAnalysis<MemberMessageCountR
     public MemberMessageCountResult execute(Chat chat)
     {
         Map<ChatMember, Integer> sortedMap = chat.getMembers().stream()
-            .sorted((m1, m2) -> comparator.compare(m1.getMessageCount(), m2.getMessageCount()))
+            .sorted(Comparator.comparing(ChatMember::getMessageCount, comparator))
             .collect(Collectors.toMap(
                 Function.identity(),
                 ChatMember::getMessageCount,
