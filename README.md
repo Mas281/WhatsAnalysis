@@ -8,25 +8,7 @@ This was made a while ago when I first learnt regex and wanted to apply it to so
 
 ## Usage
 
-To parse a chat:
-```java
-Optional<Chat> optChat = WhatsAnalysis.parseChat(new File("yourchat.txt"));
-// You can also parse a chat asynchronously using
-// WhatsAnalysis.parseChatAsync(File) which returns
-// a CompletableFuture object
-
-if (optChat.isPresent())
-{
-    // The file was parsed successfully
-    
-    // See the "Chat", "ChatMember" and "ChatMessage" 
-    // classes for the available methods to use
-}
-else
-{
-    // Error parsing file
-}
-```
+See the test file at src/test/java/ChatParseTest.java for example usage
 
 ## Maven
 

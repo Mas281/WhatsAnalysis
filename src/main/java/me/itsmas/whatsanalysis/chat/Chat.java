@@ -1,8 +1,11 @@
 package me.itsmas.whatsanalysis.chat;
 
+import me.itsmas.whatsanalysis.analysis.ChatAnalysis;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Class holding data about a chat
@@ -23,6 +26,36 @@ public class Chat
     {
         this.members = members;
         this.messages = messages;
+    }
+
+    /**
+     * Executes a {@link ChatAnalysis}
+     * and returns the result
+     *
+     * @see ChatAnalysis#execute(Chat)
+     *
+     * @param analysis The analysis
+     *
+     * @return The analysis result
+     */
+    public <T> T executeAnalysis(ChatAnalysis<T> analysis)
+    {
+        return analysis.execute(this);
+    }
+
+    /**
+     * Executes a {@link ChatAnalysis} asynchronously
+     * and returns the result
+     *
+     * @see #executeAnalysisAsync(ChatAnalysis)
+     *
+     * @param analysis The analysis
+     *
+     * @return A {@link CompletableFuture} holding the analysis result
+     */
+    public <T> CompletableFuture<T> executeAnalysisAsync(ChatAnalysis<T> analysis)
+    {
+        return CompletableFuture.supplyAsync(() -> executeAnalysis(analysis));
     }
 
     /**

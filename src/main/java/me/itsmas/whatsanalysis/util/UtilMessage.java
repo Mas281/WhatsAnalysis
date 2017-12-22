@@ -72,7 +72,7 @@ public final class UtilMessage
             }
             // Invalid date format, will
             // never happen when using
-            // a real, unmodified chat file
+            // a real, unmodified chat file.
             catch (ParseException ignored) {}
         }
 
