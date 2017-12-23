@@ -1,6 +1,8 @@
 import me.itsmas.whatsanalysis.WhatsAnalysis;
 import me.itsmas.whatsanalysis.analysis.types.MemberMessageCountAnalysis;
 import me.itsmas.whatsanalysis.analysis.types.MemberMessageCountAnalysis.MemberMessageCountResult;
+import me.itsmas.whatsanalysis.analysis.types.WordFrequencyAnalysis;
+import me.itsmas.whatsanalysis.analysis.types.WordFrequencyAnalysis.WordFrequencyResult;
 import me.itsmas.whatsanalysis.chat.Chat;
 import org.junit.Test;
 
@@ -11,8 +13,6 @@ import static org.junit.Assert.fail;
 
 public class ChatParseTest
 {
-    private Chat chat;
-
     @Test
     public void parseTest()
     {
@@ -24,16 +24,25 @@ public class ChatParseTest
 
         if (optChat.isPresent())
         {
-            chat = optChat.get();
+            Chat chat = optChat.get();
 
+            // Total messages
             System.out.println("Parsed " + chat.getMessageCount() + " messages in " + time + "ms");
             System.out.println();
 
-            // Creates sorted map of member count message counts in descending order
+            // Messages by member
             MemberMessageCountResult msgCountResult = chat.executeAnalysis(new MemberMessageCountAnalysis());
 
             msgCountResult.getSorted().forEach((member, count) ->
                 System.out.println(member.getName() + " - " + count + " messages")
+            );
+            System.out.println();
+
+            // Word frequency (top 10)
+            WordFrequencyResult wordFreqResult = chat.executeAnalysis(new WordFrequencyAnalysis(10));
+
+            wordFreqResult.getSorted().forEach((position, data) ->
+                System.out.println("#" + position + " - " + data.word + " (" + data.uses + ")")
             );
         }
         else

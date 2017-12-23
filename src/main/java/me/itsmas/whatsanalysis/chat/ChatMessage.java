@@ -81,6 +81,17 @@ public class ChatMessage
     }
 
     /**
+     * Determines whether the message
+     * is a media message
+     *
+     * @return Whether the message is a media message
+     */
+    public boolean isMediaMessage()
+    {
+        return getContent().equals("<Media omitted>");
+    }
+
+    /**
      * Fetches the message's sender
      *
      * @see #sender

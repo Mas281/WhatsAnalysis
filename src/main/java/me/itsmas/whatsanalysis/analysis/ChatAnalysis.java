@@ -7,7 +7,7 @@ import me.itsmas.whatsanalysis.chat.Chat;
  *
  * @param <T> The object type returned by the analysis
  */
-public abstract class ChatAnalysis<T>
+public interface ChatAnalysis<T>
 {
     /**
      * Executes the analysis
@@ -15,5 +15,5 @@ public abstract class ChatAnalysis<T>
      *
      * @param chat The chat to analyse
      */
-    public abstract T execute(Chat chat);
+    T execute(Chat chat);
 }

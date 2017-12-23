@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  * map will be sorted by message counts
  * descending
  */
-public class MemberMessageCountAnalysis extends ChatAnalysis<MemberMessageCountResult>
+public class MemberMessageCountAnalysis implements ChatAnalysis<MemberMessageCountResult>
 {
     /**
      * The default comparator to use
@@ -66,7 +66,7 @@ public class MemberMessageCountAnalysis extends ChatAnalysis<MemberMessageCountR
             .collect(Collectors.toMap(
                 Function.identity(),
                 ChatMember::getMessageCount,
-                (t1, t2) -> t1,
+                (v1, v2) -> v1,
                 LinkedHashMap::new
             ));
 
@@ -74,7 +74,7 @@ public class MemberMessageCountAnalysis extends ChatAnalysis<MemberMessageCountR
     }
 
     /**
-     * The result of the {@link MemberMessageCountAnalysis}
+     * The result of a {@link MemberMessageCountAnalysis}
      */
     public class MemberMessageCountResult
     {
@@ -84,7 +84,7 @@ public class MemberMessageCountAnalysis extends ChatAnalysis<MemberMessageCountR
          */
         private final Map<ChatMember, Integer> messageCounts;
 
-        public MemberMessageCountResult(Map<ChatMember, Integer> messageCounts)
+        private MemberMessageCountResult(Map<ChatMember, Integer> messageCounts)
         {
             this.messageCounts = messageCounts;
         }
@@ -102,7 +102,7 @@ public class MemberMessageCountAnalysis extends ChatAnalysis<MemberMessageCountR
         }
 
         /**
-         * Fetches a sorted map of {@link ChatMember}
+         * Fetches the sorted map of {@link ChatMember}
          * objects to their respective message count
          *
          * @return Immutable sorted map of members to message counts
